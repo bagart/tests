@@ -1,7 +1,7 @@
 <?php
 /**
   * @doc https://ru.wikipedia.org/wiki/%D0%94%D0%B2%D0%BE%D0%B8%D1%87%D0%BD%D1%8B%D0%B9_%D0%BF%D0%BE%D0%B8%D1%81%D0%BA
-  * Write a listbox-style binary search for an ordered array of integers.  Listbox-style means that you should return the index of the first item greater than or equal to the item being searched for; if all items are less, you should return the index of the last item.  You are guaranteed that there is at least one item in the array.
+  * 
  */
 require_once __DIR__ . '/test.inc.php';
 
