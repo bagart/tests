@@ -1,6 +1,6 @@
 <?php
 /**
- * mixe slice sum from array
+ * max slice sum from random[]
  */
 require_once __DIR__ . '/test.inc.php';
 
