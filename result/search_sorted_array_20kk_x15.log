@@ -1,0 +1,32 @@
+prepare data
+	last_time: 48.445s
+	memory: +1023.93mb / 1024.4mb / 1024.4mb
+
+BinSearchWhileEqOrGtArray
+	last_time: 0s
+	memory: +0b / 1024.4mb / 1024.44mb
+
+BinSearchWhileEqOrGtHash
+	last_time: 1.007s
+	memory: +0b / 1024.41mb / 1024.45mb
+
+BinSearchRecursiveCopyEqOrGtArray
+	last_time: 0s
+	memory: +0b / 1024.41mb / 1024.45mb
+
+BinSearchRecursiveReferenceEqOrGtArray
+	last_time: 0s
+	memory: +0b / 1024.42mb / 1024.46mb
+
+BinSearchRecursiveReferenceEqOrGtHash
+	last_time: 0.476s
+	memory: +0b / 1024.42mb / 1024.46mb
+
+BinSearchRecursiveCopyChangedEqOrGtArray
+	last_time: 2.544s
+	memory: +1023.96mb / 1024.43mb / 2048.43mb
+
+BinSearchRecursiveSliceEqOrGtHash
+	last_time: 4.274s
+	memory: +128.02mb / 1024.44mb / 2176.45mb
+
