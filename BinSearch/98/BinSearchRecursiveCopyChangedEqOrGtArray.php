@@ -32,7 +32,6 @@ $test->test_func(
  */
 function BinSearchRecursiveCopyChangedEqOrGtArray(array $array, $find, $left = 0, $right = null) {
     $array[0] = $array[0];
-
     if ($left >= $right) {
         if ($right !== null) {
             return $left;   //check and return false for eq only

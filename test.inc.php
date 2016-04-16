@@ -12,27 +12,53 @@ class Test
     const TYPE_INT_SORTED = 'get_int_sorted';
 
     const TYPE_RANDOM = 'get_random';
+
+    private $show_result = true;
+    private $check_result = true;
+    private $last_result;
+
     private $start_time;
     private $last_time;
     private $last_mem;
+    //wrong way for check peak mem.  chunk, maby
+    private $use_cache = false;
 
     public static function create()
     {
+        ini_set('xdebug.max_nesting_level', 23000);
+        ini_set('xdebug.memory_limit', '2gb');
+        
+        set_time_limit(0);
+        
         return new static;
     }
 
     protected function  __construct()
     {
-        $this->last_time = $this->start_time = microtime(true);
+        $this->start_time = microtime(true);
+        $this->reset();
     }
 
     public $log_lvl = self::LOG_LVL_INFO;
 
-    public function log($test, $lvl = self::LOG_LVL_NOTICE, $new_line = true, $tab = 0)
+    public function log($text = null, $lvl = self::LOG_LVL_NOTICE, $new_line = true, $tab = 0)
     {
         if ($lvl >= $this->log_lvl) {
-            echo str_repeat(empty($_SERVER['TERM'])? "&nbsp;&nbsp;&nbsp;&nbsp;" : "\t", $tab) . $test , $new_line ? (empty($_SERVER['TERM'])? "<br />" : null) . "\n" : null;
+            echo str_repeat(
+                    empty($_SERVER['TERM'])? "&nbsp;&nbsp;&nbsp;&nbsp;" : "\t", 
+                    $tab
+                ),
+                $text,
+                $new_line
+                    ? (
+                            empty($_SERVER['TERM'])
+                                ? "<br />" 
+                                : null
+                    ) . "\n" 
+                    : null;
         }
+        
+        return $this;
     }
 
     protected function get_by_type($type, array $param = [])
@@ -62,6 +88,7 @@ class Test
             'last' => null,
             'from' => -100000,
         ];
+
         return (
             $param['last'] === null
                 ? $param['from']
@@ -69,7 +96,6 @@ class Test
         );
     }
 
-    
     public function get_int_near(
         array $param = []
     )
@@ -105,25 +131,29 @@ class Test
             'type' => self::TYPE_INT, 
             'size' => 5000,
         ];
+        if ($this->use_cache) {
+            $temp_file = '/tmp/test_serialize' . $param['type'] . '_' . $param['size'] . '.tmp';
 
-        $temp_file = '/tmp/test_serialize' . $param['type'] . '_' . $param['size'] . '.tmp';
-        
-        if (is_readable($temp_file) && filesize($temp_file)) {
-            //$this->log("debug new range", 1);
-            return unserialize(file_get_contents($temp_file));
+            if (is_readable($temp_file) && filesize($temp_file)) {
+                //$this->log("debug new range", 1);
+                return unserialize(file_get_contents($temp_file));
+            }
         }
 
         $test = [];
         $last = null;
-        for ($i = 0; $i < $param['size']; ++$i) {
+        $i = $param['size'];//new var for keep param
+        while (--$i >=0) {// compare for size < 0
             $test[] = $last = $this->get_by_type(
                 $param['type'],
                 ['last' => $last, 'type' => null] + $param
             );
         }
-
-        file_put_contents($temp_file, serialize($test));
-        $this->log("1st run", 1);
+        if ($this->use_cache) {
+            file_put_contents($temp_file, serialize($test));
+            $this->log("1st run", 1);
+        }
+        
 
         return $test;
     }
@@ -133,12 +163,14 @@ class Test
         $tmp_time = microtime(true);
         $this->log(
             ($last ? 'last' : 'full') 
-                . '_time: ' 
-                . round($tmp_time - ($last ? $this->last_time : $this->start_time), 2) 
+                . '_time: '
+                . round($tmp_time - ($last ? $this->last_time : $this->start_time), 3)
                 . 's', 
             $lvl
         );
         $this->last_time = $tmp_time;
+
+        return $this;
     }
     
     public function get_size($size, $precision = 2)
@@ -159,7 +191,7 @@ class Test
     {
         $mem = [];
         if ($type == 'diff' || $type == 'all') {
-            $mem[] = '+'.$this->get_size(memory_get_usage() - $this->last_mem);
+            $mem[] = '+'.$this->get_size(memory_get_peak_usage() - $this->last_mem);
         }        
         if ($type == 'usage' || $type == 'all') {
             $mem[] = $this->get_size(memory_get_usage());
@@ -171,29 +203,106 @@ class Test
             'memory: ' . implode(' / ', $mem),
             $lvl
         );
+
+        return $this;
     }
     
     public function __destruct()
     {
         $this->log(null, self::LOG_LVL_NOTICE);//new line
     }
+    public function setShowResult($show_result)
+    {
+        $this->show_result = $show_result;
+        
+        return $this;    
+    }
 
     public function reset()
     {
         $this->last_time = microtime(true);
-        $this->last_mem = memory_get_usage();
+        $this->last_mem = memory_get_peak_usage();
+
+        return $this;
     }
 
-    public function test_func($func, $param, $name = null) 
+    public function log_result($test = null)
     {
-        $this->reset();
-        $this->log(
-            ($name ? $name : (is_string($func) ? $func : 'callback')) . ': ' 
-                . var_export(call_user_func_array($func, $param), true)
-        );
-        $this->log(null, self::LOG_LVL_NOTICE, false, 1);
-        $this->log_time('last');
-        $this->log(null, self::LOG_LVL_NOTICE, false, 1);
-        $this->log_mem();
-    }        
+        if ($test !== null) {
+            $this->log($test);
+        }
+        return $this
+            ->log(null, self::LOG_LVL_NOTICE, false, 1)
+            ->log_time('last')
+            ->log(null, self::LOG_LVL_NOTICE, false, 1)
+            ->log_mem();
+    }
+    
+    public function test_func($func, $param, $name = null)
+    {
+        $this
+            ->log()
+            ->reset()
+            ->log(
+                $name
+                    ? $name : (is_string($func)
+                    ? $func : (new Exception())->getTraceAsString())
+            );
+        $result = call_user_func_array($func, $param);
+        
+        $this->log_result();
+        $crc = null;
+        if ($this->check_result || $this->show_result == 'crc') {
+            $crc = crc32(serialize($result));
+        }
+        if ($this->check_result) {
+            if ($this->last_result !== null && $this->last_result !== $crc) {
+                $this->log('result is diff !!!!!');
+            }
+            $this->last_result = $crc;
+        }
+
+        if ($this->show_result) {
+            switch ($this->show_result) {
+                case 'crc':
+                    $result = $crc;
+                    break;
+                case false:
+                    $result = '';
+                    break;
+                default:
+                    $result = var_export($result, 1);
+                    break;
+            }
+            $this
+                ->log("result: {$result}");
+        }
+        
+        return $this;
+    }   
+    
+    protected function getFiles($directory = null, $recursive = true)
+    {
+        $iterator = new \DirectoryIterator ( $directory );
+        $file = [];
+        foreach ($iterator as $info) {
+            if ($info->isFile()) {
+                if (mb_substr($info, -4) == '.php') {
+                    $file[$directory . DIRECTORY_SEPARATOR . $info] = true;
+                }
+            } elseif ($recursive && !$info->isDot()) {
+                $file += $this->getFiles($directory . DIRECTORY_SEPARATOR . $info);
+            }
+        }
+
+        return $file;
+    }
+    
+    public function getScripts($directory = null, $recursive = true)
+    {
+        $file = $this->getFiles($directory, $recursive);
+        ksort($file);
+
+        return array_keys($file);
+    }
 }
