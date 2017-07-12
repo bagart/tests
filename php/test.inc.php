@@ -63,7 +63,7 @@ class Test
 
     protected function get_by_type($type, array $param = [])
     {
-        assert(strpos('get_', $type) === 1);
+        //assert(strpos('get_', $type) === 1);
 
         return call_user_func_array(
             [$this, $type],
