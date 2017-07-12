@@ -1,5 +1,128 @@
 <?php
 //calculate bit sum of random data
+
+/**
+ * result
+ *
+
+$ php bit_sum.php
+array (
+'count_chars' =>
+array (
+'time' => '0.00511s',
+'mem_peak' => '10.42mb',
+'checked' => true,
+),
+'chunk(1024) str_split' =>
+array (
+'time' => '0.57895s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+'str[i] chr' =>
+array (
+'time' => '0.59167s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+'str[i] ord' =>
+array (
+'time' => '0.8029s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+'substr 1 chr' =>
+array (
+'time' => '0.95857s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+'substr 1 ord' =>
+array (
+'time' => '1.31242s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+'substr ord map SplFixedArray' =>
+array (
+'time' => '2.41572s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+'substr ord map []' =>
+array (
+'time' => '2.02112s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+'sprintf without map' =>
+array (
+'time' => '4.32414s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+)
+
+$ php bit_sum.php str
+array (
+'count_chars' =>
+array (
+'time' => '0.00619s',
+'mem_peak' => '10.42mb',
+'checked' => true,
+),
+'chunk(1024) str_split' =>
+array (
+'time' => '0.57007s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+'str[i] chr' =>
+array (
+'time' => '0.59385s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+'str[i] ord' =>
+array (
+'time' => '0.83155s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+'substr 1 chr' =>
+array (
+'time' => '0.94832s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+'substr 1 ord' =>
+array (
+'time' => '1.34276s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+'substr ord map SplFixedArray' =>
+array (
+'time' => '2.38495s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+'substr ord map []' =>
+array (
+'time' => '2.02575s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+'sprintf without map' =>
+array (
+'time' => '4.25052s',
+'mem_peak' => '10.47mb',
+'checked' => true,
+),
+)
+
+ *
+ */
 ini_set('memory_limit', '256M');
 $s_len = 10000000;//in-memory!
 
