@@ -1,10 +1,10 @@
 <?php
 //calculate bit sum
-
+$n_max = 10000;
 $t_start = microtime(true);
 {
     //map_1 bit sum
-    for ($n = 0; $n < 100000; ++$n) {
+    for ($n = 0; $n < $n_max; ++$n) {
         $map1 = new SplFixedArray(256);
         for ($i = 0; $i < 256; ++$i) {
             $map1[$i] = ($i & 1)
@@ -24,7 +24,7 @@ $t_start = microtime(true);
 
 {
     //map_2 bit while
-    for ($n = 0; $n < 100000; ++$n) {
+    for ($n = 0; $n < $n_max; ++$n) {
         $map2 = new SplFixedArray(256);
         for ($i = 0; $i < 256; ++$i) {
             $cnt = 0;
@@ -42,7 +42,7 @@ $result['map_2 bit while'] = round((microtime(true) - $t_start), 5) . 's';
 $t_start = microtime(true);
 {
 //sprintf substr_count
-    for ($n = 0; $n < 100000; ++$n) {
+    for ($n = 0; $n < $n_max; ++$n) {
         $map3 = new SplFixedArray(256);
         for ($i = 0; $i < 256; ++$i) {
             $map3[$i] = substr_count(sprintf('%b', $i), '1');
@@ -53,7 +53,7 @@ $result['map_3 sprintf substr_count'] = round((microtime(true) - $t_start), 5) .
 $t_start = microtime(true);
 {
     //sprintf split sum
-    for ($n = 0; $n < 100000; ++$n) {
+    for ($n = 0; $n < $n_max; ++$n) {
         $map4 = new SplFixedArray(256);
         for ($i = 0; $i < 256; ++$i) {
             $map4[$i] = array_sum(str_split(sprintf('%b', $i), '1'));
@@ -66,7 +66,7 @@ $t_start = microtime(true);
 
 {
     //base_convert substr_count
-    for ($n = 0; $n < 100000; ++$n) {
+    for ($n = 0; $n < $n_max; ++$n) {
         $map5 = new SplFixedArray(256);
         for ($i = 0; $i < 256; ++$i) {
             $map5[$i] = substr_count(base_convert(unpack('H*', chr($i))[1], 16, 2), '1');
@@ -78,7 +78,7 @@ $t_start = microtime(true);
 
 {
     //base_convert split sum
-    for ($n = 0; $n < 100000; ++$n) {
+    for ($n = 0; $n < $n_max; ++$n) {
         $map6 = new SplFixedArray(256);
         for ($i = 0; $i < 256; ++$i) {
             $map6[$i] = array_sum(str_split(base_convert(unpack('H*', chr($i))[1], 16, 2)));
@@ -87,7 +87,8 @@ $t_start = microtime(true);
 }
 $result['map_6 base_convert split sum'] = round((microtime(true) - $t_start), 5) . 's';
 
-var_dump($result);
+echo json_encode($result, JSON_PRETTY_PRINT);
+
 //check
 for ($i = 0; $i < 256; ++$i) {
     if (
