@@ -22,11 +22,11 @@ for ($i = 0; $i < 256; ++$i) {
 $rnd_str = false;
 if (in_array('str', $argv)) {
     $rnd_str = true;
-    $file_bit_name = '../tmp/str.rnd';
-    $file_bit_calc_name = '../tmp/str.calc';
+    $file_bit_name = 'tmp/str.rnd';
+    $file_bit_calc_name = 'tmp/str.calc';
 } else {
-    $file_bit_name = '../tmp/bit.rnd';
-    $file_bit_calc_name = '../tmp/bit.calc';
+    $file_bit_name = 'tmp/bit.rnd';
+    $file_bit_calc_name = 'tmp/bit.calc';
 }
 
 if (
