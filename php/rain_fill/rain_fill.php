@@ -44,12 +44,12 @@ if ($unit_tests) {
 
 foreach (
     [
-        [100000, 100],
-        [9999, 9999],
-        [100, 100000]
+        [1000, 1000],
+        [10000, 10000],
+        [100000, 100000],
     ]
     as $params) {
-    $tests = 10;
+    $tests = 1;
     list($len, $range) = $params;
     $times = [];
     $m1 = $m2 = null;
