@@ -28,4 +28,25 @@ avg time diff range2 - range1:0.37sec (LAST diff: 2555%)
 first mem diff range2 - range1: 3.99mb (62.28%)
 
 ```
-   
+
+
+```
+$ php php/rain_fill/rain_fill.php
+
+test rain1
+1111111111111111111111111111111111
+test rain2
+1111111111111111111111111111111111
+10 test for 100000 elements with rand(0, 100)
+avg time diff range2 - range1:0.42sec (LAST diff: 808.62%)
+first mem diff range2 - range1: 0.01mb (0.15%)
+
+10 test for 9999 elements with rand(0, 9999)
+avg time diff range2 - range1:4.3sec (LAST diff: 44802.29%)
+first mem diff range2 - range1: 0mb (0%)
+
+10 test for 100 elements with rand(0, 100000)
+avg time diff range2 - range1:0.39sec (LAST diff: 753.89%)
+first mem diff range2 - range1: 3.99mb (62.28%)
+
+```

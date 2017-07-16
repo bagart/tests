@@ -1,52 +1,51 @@
 <?php
 $debug = false;
-$unit_tests = false;
-
+$unit_tests = true;
 if ($unit_tests) {
     foreach (['rain1', 'rain2'] as $func) {
         echo "\ntest {$func}\n";
-        echo(2 == $func([1, 1, 2, 1, 1, 2]) ? 1 : 0);
-        echo(10 == $func([2, 5, 1, 2, 7, 4, 7, 7, 6]) ? 1 : 0);
-        echo(10 == $func([2, 5, 1, 2, 10, 4, 7, 7, 6]) ? 1 : 0);
-        echo(12 == $func([2, 5, 1, 2, 3, 7, 4, 7, 7, 6]) ? 1 : 0);
-        echo(12 == $func([5, 1, 2, 3, 7, 4, 7]) ? 1 : 0);
-        echo(10 == $func([5, 1, 3, 7, 1, 5]) ? 1 : 0);
-        echo(3 == $func([5, 3, 4, 7, 7, 6]) ? 1 : 0);
-        echo(1 == $func([2, 1, 6, 6, 6]) ? 1 : 0);
-        echo(0 == $func([2, 3]) ? 1 : 0);
-        echo(0 == $func([2]) ? 1 : 0);
-        echo(0 == $func([]) ? 1 : 0);
-        echo(0 == $func([1, 2, 1]) ? 1 : 0);
-        echo(0 == $func([1, 2, 2, 1]) ? 1 : 0);
-        echo(0 == $func([1, 2, 10, 1]) ? 1 : 0);
-        echo(0 == $func([1, 2, 10, 3, 1]) ? 1 : 0);
-        echo(1 == $func([1, 2, 1, 2, 1]) ? 1 : 0);
-        echo(2 == $func([1, 2, 1, 1, 2, 1]) ? 1 : 0);
-        echo(2 == $func([2, 1, 1, 2]) ? 1 : 0);
-        echo(1 == $func([2, 3, 2, 3]) ? 1 : 0);
-        echo(2 == $func([2, 1, 2, 1, 2]) ? 1 : 0);
-        echo(2 == $func([2, 1, 100, 1, 2]) ? 1 : 0);
-        echo(4 == $func([5, 4, 3, 4, 5]) ? 1 : 0);
-        echo(4 == $func([3, 1, 100, 1, 3]) ? 1 : 0);
-        echo(4 == $func([3, 1, 100, 100, 1, 3]) ? 1 : 0);
-        echo(2 == $func([3, 2, 4, 3, 5]) ? 1 : 0);
-        echo(2 == $func([5, 3, 4, 2, 3]) ? 1 : 0);
-        echo(2 == $func([1, 3, 2, 4, 3, 5]) ? 1 : 0);
-        echo(2 == $func([5, 3, 4, 2, 3, 1]) ? 1 : 0);
+        echo 2 == $func([1, 1, 2, 1, 1, 2]) ? 1 : 0;
+        echo 10 == $func([2, 5, 1, 2, 7, 4, 7, 7, 6]) ? 1 : 0;
+        echo 10 == $func([2, 5, 1, 2, 10, 4, 7, 7, 6]) ? 1 : 0;
+        echo 12 == $func([2, 5, 1, 2, 3, 7, 4, 7, 7, 6]) ? 1 : 0;
+        echo 12 == $func([5, 1, 2, 3, 7, 4, 7]) ? 1 : 0;
+        echo 10 == $func([5, 1, 3, 7, 1, 5]) ? 1 : 0;
+        echo 3 == $func([5, 3, 4, 7, 7, 6]) ? 1 : 0;
+        echo 1 == $func([2, 1, 6, 6, 6]) ? 1 : 0;
+        echo 0 == $func([2, 3]) ? 1 : 0;
+        echo 0 == $func([2]) ? 1 : 0;
+        echo 0 == $func([]) ? 1 : 0;
+        echo 0 == $func([1, 2, 1]) ? 1 : 0;
+        echo 0 == $func([1, 2, 2, 1]) ? 1 : 0;
+        echo 0 == $func([1, 2, 10, 1]) ? 1 : 0;
+        echo 0 == $func([1, 2, 10, 3, 1]) ? 1 : 0;
+        echo 1 == $func([1, 2, 1, 2, 1]) ? 1 : 0;
+        echo 2 == $func([1, 2, 1, 1, 2, 1]) ? 1 : 0;
+        echo 2 == $func([2, 1, 1, 2]) ? 1 : 0;
+        echo 1 == $func([2, 3, 2, 3]) ? 1 : 0;
+        echo 2 == $func([2, 1, 2, 1, 2]) ? 1 : 0;
+        echo 2 == $func([2, 1, 100, 1, 2]) ? 1 : 0;
+        echo 4 == $func([5, 4, 3, 4, 5]) ? 1 : 0;
+        echo 4 == $func([3, 1, 100, 1, 3]) ? 1 : 0;
+        echo 4 == $func([3, 1, 100, 100, 1, 3]) ? 1 : 0;
+        echo 2 == $func([3, 2, 4, 3, 5]) ? 1 : 0;
+        echo 2 == $func([5, 3, 4, 2, 3]) ? 1 : 0;
+        echo 2 == $func([1, 3, 2, 4, 3, 5]) ? 1 : 0;
+        echo 2 == $func([5, 3, 4, 2, 3, 1]) ? 1 : 0;
 
-        echo(3 == $func([5, 3, 4, 6, 1, 1, 1]) ? 1 : 0);
-        echo(3 == $func([5, 3, 4, 6, 1, 1, 1, 1]) ? 1 : 0);
-        echo(3 == $func([5, 4, 3, 6, 1, 1, 1]) ? 1 : 0);
-        echo(3 == $func([5, 4, 3, 6, 1, 1, 1, 1]) ? 1 : 0);
-        echo(1 == $func([3, 4, 3, 6, 1, 1, 1]) ? 1 : 0);
-        echo(1 == $func([3, 4, 3, 6, 1, 1, 1, 1]) ? 1 : 0);
+        echo 3 == $func([5, 3, 4, 6, 1, 1, 1]) ? 1 : 0;
+        echo 3 == $func([5, 3, 4, 6, 1, 1, 1, 1]) ? 1 : 0;
+        echo 3 == $func([5, 4, 3, 6, 1, 1, 1]) ? 1 : 0;
+        echo 3 == $func([5, 4, 3, 6, 1, 1, 1, 1]) ? 1 : 0;
+        echo 1 == $func([3, 4, 3, 6, 1, 1, 1]) ? 1 : 0;
+        echo 1 == $func([3, 4, 3, 6, 1, 1, 1, 1]) ? 1 : 0;
     }
 }
 
 foreach (
     [
         [100000, 100],
-        [10000, 10000],
+        [9999, 9999],
         [100, 100000]
     ]
     as $params) {
@@ -79,6 +78,7 @@ foreach (
         }
         $times[] = ($t2 - $t1);
     }
+
     echo "avg time diff range2 - range1:", round(array_sum($times) / count($times),
         2), "sec (LAST diff: ", round(100 * end($times) / $t1, 2), "%)\n";
     echo "first mem diff range2 - range1: ", round(($m2 - $m1) / 1024 / 1024,
@@ -88,15 +88,15 @@ foreach (
 function rain1($data)
 {
     global $debug;
-    $left = -1;//first idx-1 by x
-    $right = count($data); //last+1 idx by x
     $result = 0;
-    $waterline = 0;// min($left, $right)
-    $left_mem = [];//left mem by y
-    $right_mem = [];//right mem by y
-    $left_max = 0;//left max
-    $right_max = 0;//right max
-    //move from different side |-> .... <-|
+    $left = -1;             //first idx-1 by x
+    $right = count($data);  //last+1 idx by x
+    $waterline = 0;         // min($left, $right)
+    $left_mem = [];         //left mem by y
+    $right_mem = [];        //right mem by y
+    $left_max = 0;          //left max
+    $right_max = 0;         //right max
+    //move from different side in center    |-> .... <-|
     while (++$left <= --$right) {
         $waterline_cur = max(
             $waterline,
