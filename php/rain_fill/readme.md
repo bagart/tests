@@ -14,6 +14,8 @@ Write a program to return the volume for any array.
 
 
 ```
+$ php php/rain_fill/rain_fill.php
+
 avg time diff range2 - range1:0.42sec (LAST diff: 811.66%)
 first mem diff range2 - range1: 0.01mb (0.15%)
 
