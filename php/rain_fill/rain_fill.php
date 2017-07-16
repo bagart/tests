@@ -4,6 +4,7 @@ $unit_tests = true;
 if ($unit_tests) {
     foreach (['rain1', 'rain2'] as $func) {
         echo "\ntest {$func}\n";
+        echo 10 == $func([2, 5, 1, 2, 3, 4, 7, 7, 6]) ? 1 : 0;
         echo 2 == $func([1, 1, 2, 1, 1, 2]) ? 1 : 0;
         echo 10 == $func([2, 5, 1, 2, 7, 4, 7, 7, 6]) ? 1 : 0;
         echo 10 == $func([2, 5, 1, 2, 10, 4, 7, 7, 6]) ? 1 : 0;
@@ -39,6 +40,8 @@ if ($unit_tests) {
         echo 3 == $func([5, 4, 3, 6, 1, 1, 1, 1]) ? 1 : 0;
         echo 1 == $func([3, 4, 3, 6, 1, 1, 1]) ? 1 : 0;
         echo 1 == $func([3, 4, 3, 6, 1, 1, 1, 1]) ? 1 : 0;
+
+        echo 4 == $func([2, 1, 0, 1, 2]) ? 1 : 0;
     }
 }
 
