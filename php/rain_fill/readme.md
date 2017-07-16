@@ -1,3 +1,18 @@
+TASK:
+
+http://www.businessinsider.com/twitter-job-interview-question-rainfall-walls-2013-12
+
+In Fig. 1, we have walls of different heights. Such pictures are represented by an array of integers, where the value at each index is the height of the wall. Fig. 1 is represented with an array as [2,5,1,2,3,4,7,7,6].
+
+Now imagine it rains. How much water is going to be accumulated in puddles between walls? For example, if it rains in Fig 1, the following puddle will be formed:
+
+No puddles are formed at edges of the wall, water is considered to simply run off the edge.
+
+We count volume in square blocks of 1×1. Thus, we are left with a puddle between column 1 and column 6 and the volume is 10.
+
+Write a program to return the volume for any array.
+
+
 ```
 avg time diff range2 - range1:0.42sec (LAST diff: 811.66%)
 first mem diff range2 - range1: 0.01mb (0.15%)
