@@ -31,6 +31,13 @@ var_dump(2 == rain([5, 3, 4, 2, 3]));
 var_dump(2 == rain([1, 3, 2, 4, 3, 5]));
 var_dump(2 == rain([5, 3, 4, 2, 3, 1]));
 
+var_dump(3 == rain([5, 3, 4, 6, 1, 1, 1]));
+var_dump(3 == rain([5, 3, 4, 6, 1, 1, 1, 1]));
+var_dump(3 == rain([5, 4, 3, 6, 1, 1, 1]));
+var_dump(3 == rain([5, 4, 3, 6, 1, 1, 1, 1]));
+var_dump(1 == rain([3, 4, 3, 6, 1, 1, 1]));
+var_dump(1 == rain([3, 4, 3, 6, 1, 1, 1, 1]));
+
 function rain($data)
 {
     global $debug;
@@ -54,26 +61,22 @@ function rain($data)
         $result += ($waterline_cur > $data[$left] ? $waterline_cur - $data[$left] : 0)
             + ($right != $left && $waterline_cur > $data[$right] ? $waterline_cur - $data[$right] : 0);
 
-        for ($y = $waterline + 1; $y <= min($data[$left], $left_max); ++$y) {
+        for ($y = $waterline + 1; $y <= $data[$left]; ++$y) {
             $result += ($left_mem[$y] ?? 0);
             unset($left_mem[$y]);
         }
-
-        for ($y = $waterline + 1; $y <= min($data[$right], $right_max); ++$y) {
+        for ($y = $waterline + 1; $y <= $data[$right]; ++$y) {
             $result += ($right_mem[$y] ?? 0);
             unset($right_mem[$y]);
         }
-
 
         for ($y = $data[$left] + 1; $y <= $left_max; ++$y) {
             $left_mem[$y] = ($left_mem[$y] ?? 0) + 1;
         }
 
-
         for ($y = $data[$right] + 1; $y <= $right_max; ++$y) {
             $right_mem[$y] = ($right_mem[$y] ?? 0) + 1;
         }
-
 
         if ($debug) {
             echo json_encode([
