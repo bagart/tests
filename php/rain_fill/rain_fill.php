@@ -68,7 +68,7 @@ foreach ([[100000, 100], [100, 100000]] as $params) {
             $m2 = memory_get_peak_usage();
         }
         if ($r1 != $r2) {
-            echo "ERROR with:", json_encode($test), "\n";
+            echo "ERROR range1 !=range2", $debug ? ": " . json_encode($test) : null, "\n";
         }
         $times[] = ($t2 - $t1);
     }
@@ -136,11 +136,11 @@ function rain2($data)
         $result += ($waterline_cur > $data[$left] ? $waterline_cur - $data[$left] : 0)
             + ($right != $left && $waterline_cur > $data[$right] ? $waterline_cur - $data[$right] : 0);
 
-        for ($y = $waterline + 1; $y <= max($data[$left],$waterline_cur); ++$y) {
+        for ($y = $waterline + 1; $y <= max($data[$left], $waterline_cur); ++$y) {
             $result += ($left_mem[$y] ?? 0);
             unset($left_mem[$y]);
         }
-        for ($y = $waterline + 1; $y <= max($data[$right],$waterline_cur); ++$y) {
+        for ($y = $waterline + 1; $y <= max($data[$right], $waterline_cur); ++$y) {
             $result += ($right_mem[$y] ?? 0);
             unset($right_mem[$y]);
         }
