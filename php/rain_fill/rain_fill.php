@@ -1,44 +1,84 @@
 <?php
 
 $debug = 0;
+foreach(['rain','rain2'] as $func) {
+    var_dump(10 == $func([2, 5, 1, 2, 7, 4, 7, 7, 6]));
+    var_dump(10 == $func([2, 5, 1, 2, 10, 4, 7, 7, 6]));
+    var_dump(12 == $func([2, 5, 1, 2, 3, 7, 4, 7, 7, 6]));
+    var_dump(12 == $func([5, 1, 2, 3, 7, 4, 7]));
+    var_dump(10 == $func([5, 1, 3, 7, 1, 5]));
+    var_dump(3 == $func([5, 3, 4, 7, 7, 6]));
+    var_dump(1 == $func([2, 1, 6, 6, 6]));
+    var_dump(0 == $func([2, 3]));
+    var_dump(0 == $func([2]));
+    var_dump(0 == $func([]));
+    var_dump(0 == $func([1, 2, 1]));
+    var_dump(0 == $func([1, 2, 2, 1]));
+    var_dump(0 == $func([1, 2, 10, 1]));
+    var_dump(0 == $func([1, 2, 10, 3, 1]));
+    var_dump(1 == $func([1, 2, 1, 2, 1]));
+    var_dump(2 == $func([1, 2, 1, 1, 2, 1]));
+    var_dump(2 == $func([2, 1, 1, 2]));
+    var_dump(1 == $func([2, 3, 2, 3]));
+    var_dump(2 == $func([2, 1, 2, 1, 2]));
+    var_dump(2 == $func([2, 1, 100, 1, 2]));
+    var_dump(4 == $func([5, 4, 3, 4, 5]));
+    var_dump(4 == $func([3, 1, 100, 1, 3]));
+    var_dump(4 == $func([3, 1, 100, 100, 1, 3]));
+    var_dump(2 == $func([3, 2, 4, 3, 5]));
+    var_dump(2 == $func([5, 3, 4, 2, 3]));
+    var_dump(2 == $func([1, 3, 2, 4, 3, 5]));
+    var_dump(2 == $func([5, 3, 4, 2, 3, 1]));
 
-var_dump(10 == rain([2, 5, 1, 2, 3, 4, 7, 7, 6]));
-var_dump(10 == rain([2, 5, 1, 2, 7, 4, 7, 7, 6]));
-var_dump(10 == rain([2, 5, 1, 2, 10, 4, 7, 7, 6]));
-var_dump(12 == rain([2, 5, 1, 2, 3, 7, 4, 7, 7, 6]));
-var_dump(12 == rain([5, 1, 2, 3, 7, 4, 7]));
-var_dump(10 == rain([5, 1, 3, 7, 1, 5]));
-var_dump(3 == rain([5, 3, 4, 7, 7, 6]));
-var_dump(1 == rain([2, 1, 6, 6, 6]));
-var_dump(0 == rain([2, 3]));
-var_dump(0 == rain([2]));
-var_dump(0 == rain([]));
-var_dump(0 == rain([1, 2, 1]));
-var_dump(0 == rain([1, 2, 2, 1]));
-var_dump(0 == rain([1, 2, 10, 1]));
-var_dump(0 == rain([1, 2, 10, 3, 1]));
-var_dump(1 == rain([1, 2, 1, 2, 1]));
-var_dump(2 == rain([1, 2, 1, 1, 2, 1]));
-var_dump(2 == rain([2, 1, 1, 2]));
-var_dump(1 == rain([2, 3, 2, 3]));
-var_dump(2 == rain([2, 1, 2, 1, 2]));
-var_dump(2 == rain([2, 1, 100, 1, 2]));
-var_dump(4 == rain([5, 4, 3, 4, 5]));
-var_dump(4 == rain([3, 1, 100, 1, 3]));
-var_dump(4 == rain([3, 1, 100, 100, 1, 3]));
-var_dump(2 == rain([3, 2, 4, 3, 5]));
-var_dump(2 == rain([5, 3, 4, 2, 3]));
-var_dump(2 == rain([1, 3, 2, 4, 3, 5]));
-var_dump(2 == rain([5, 3, 4, 2, 3, 1]));
+    var_dump(3 == $func([5, 3, 4, 6, 1, 1, 1]));
+    var_dump(3 == $func([5, 3, 4, 6, 1, 1, 1, 1]));
+    var_dump(3 == $func([5, 4, 3, 6, 1, 1, 1]));
+    var_dump(3 == $func([5, 4, 3, 6, 1, 1, 1, 1]));
+    var_dump(1 == $func([3, 4, 3, 6, 1, 1, 1]));
+    var_dump(1 == $func([3, 4, 3, 6, 1, 1, 1, 1]));
+}
 
-var_dump(3 == rain([5, 3, 4, 6, 1, 1, 1]));
-var_dump(3 == rain([5, 3, 4, 6, 1, 1, 1, 1]));
-var_dump(3 == rain([5, 4, 3, 6, 1, 1, 1]));
-var_dump(3 == rain([5, 4, 3, 6, 1, 1, 1, 1]));
-var_dump(1 == rain([3, 4, 3, 6, 1, 1, 1]));
-var_dump(1 == rain([3, 4, 3, 6, 1, 1, 1, 1]));
 
 function rain($data)
+{
+    global $debug;
+    $idx = count($data);
+    $result = 0;
+    $mem = [];//mem by y
+    $max = 0;
+    $last = 0;
+    while ($idx--) {
+        $cur = $data[$idx];
+        if ($cur < $max) {
+            for ($y = $cur+1; $y <=$max; ++$y) {
+                $mem[$y] = ($mem[$y] ?? 0)+1;
+            }
+        }
+
+        for ($y = $last + 1;$y <= min($cur, $max);++$y) {
+            $result += ($mem[$y] ?? 0);
+            unset($mem[$y]);
+        }
+
+        if ($debug) {
+            echo json_encode([
+                'result' => '>>> ' . $result . ' <<<',
+                'cur' => $cur,
+                'last' => $last,
+                'max' => $max,
+                'mem' => $mem,
+
+            ], JSON_PRETTY_PRINT), "\n";
+        }
+        $max = max($max, $cur);
+        $last = $cur;
+    }
+
+    return $result;
+}
+
+
+function rain2($data)
 {
     global $debug;
     $left = -1;//first idx-1 by x
