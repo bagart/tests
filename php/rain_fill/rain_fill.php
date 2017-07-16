@@ -1,45 +1,82 @@
 <?php
+$debug = false;
 
-$debug = 0;
-foreach(['rain','rain2'] as $func) {
-    var_dump(10 == $func([2, 5, 1, 2, 7, 4, 7, 7, 6]));
-    var_dump(10 == $func([2, 5, 1, 2, 10, 4, 7, 7, 6]));
-    var_dump(12 == $func([2, 5, 1, 2, 3, 7, 4, 7, 7, 6]));
-    var_dump(12 == $func([5, 1, 2, 3, 7, 4, 7]));
-    var_dump(10 == $func([5, 1, 3, 7, 1, 5]));
-    var_dump(3 == $func([5, 3, 4, 7, 7, 6]));
-    var_dump(1 == $func([2, 1, 6, 6, 6]));
-    var_dump(0 == $func([2, 3]));
-    var_dump(0 == $func([2]));
-    var_dump(0 == $func([]));
-    var_dump(0 == $func([1, 2, 1]));
-    var_dump(0 == $func([1, 2, 2, 1]));
-    var_dump(0 == $func([1, 2, 10, 1]));
-    var_dump(0 == $func([1, 2, 10, 3, 1]));
-    var_dump(1 == $func([1, 2, 1, 2, 1]));
-    var_dump(2 == $func([1, 2, 1, 1, 2, 1]));
-    var_dump(2 == $func([2, 1, 1, 2]));
-    var_dump(1 == $func([2, 3, 2, 3]));
-    var_dump(2 == $func([2, 1, 2, 1, 2]));
-    var_dump(2 == $func([2, 1, 100, 1, 2]));
-    var_dump(4 == $func([5, 4, 3, 4, 5]));
-    var_dump(4 == $func([3, 1, 100, 1, 3]));
-    var_dump(4 == $func([3, 1, 100, 100, 1, 3]));
-    var_dump(2 == $func([3, 2, 4, 3, 5]));
-    var_dump(2 == $func([5, 3, 4, 2, 3]));
-    var_dump(2 == $func([1, 3, 2, 4, 3, 5]));
-    var_dump(2 == $func([5, 3, 4, 2, 3, 1]));
 
-    var_dump(3 == $func([5, 3, 4, 6, 1, 1, 1]));
-    var_dump(3 == $func([5, 3, 4, 6, 1, 1, 1, 1]));
-    var_dump(3 == $func([5, 4, 3, 6, 1, 1, 1]));
-    var_dump(3 == $func([5, 4, 3, 6, 1, 1, 1, 1]));
-    var_dump(1 == $func([3, 4, 3, 6, 1, 1, 1]));
-    var_dump(1 == $func([3, 4, 3, 6, 1, 1, 1, 1]));
+foreach (['rain1', 'rain2'] as $func) {
+    echo "\ntest {$func}\n";
+    echo(2 == $func([1, 1, 2, 1, 1, 2]) ? 1 : 0);
+    echo(10 == $func([2, 5, 1, 2, 7, 4, 7, 7, 6]) ? 1 : 0);
+    echo(10 == $func([2, 5, 1, 2, 10, 4, 7, 7, 6]) ? 1 : 0);
+    echo(12 == $func([2, 5, 1, 2, 3, 7, 4, 7, 7, 6]) ? 1 : 0);
+    echo(12 == $func([5, 1, 2, 3, 7, 4, 7]) ? 1 : 0);
+    echo(10 == $func([5, 1, 3, 7, 1, 5]) ? 1 : 0);
+    echo(3 == $func([5, 3, 4, 7, 7, 6]) ? 1 : 0);
+    echo(1 == $func([2, 1, 6, 6, 6]) ? 1 : 0);
+    echo(0 == $func([2, 3]) ? 1 : 0);
+    echo(0 == $func([2]) ? 1 : 0);
+    echo(0 == $func([]) ? 1 : 0);
+    echo(0 == $func([1, 2, 1]) ? 1 : 0);
+    echo(0 == $func([1, 2, 2, 1]) ? 1 : 0);
+    echo(0 == $func([1, 2, 10, 1]) ? 1 : 0);
+    echo(0 == $func([1, 2, 10, 3, 1]) ? 1 : 0);
+    echo(1 == $func([1, 2, 1, 2, 1]) ? 1 : 0);
+    echo(2 == $func([1, 2, 1, 1, 2, 1]) ? 1 : 0);
+    echo(2 == $func([2, 1, 1, 2]) ? 1 : 0);
+    echo(1 == $func([2, 3, 2, 3]) ? 1 : 0);
+    echo(2 == $func([2, 1, 2, 1, 2]) ? 1 : 0);
+    echo(2 == $func([2, 1, 100, 1, 2]) ? 1 : 0);
+    echo(4 == $func([5, 4, 3, 4, 5]) ? 1 : 0);
+    echo(4 == $func([3, 1, 100, 1, 3]) ? 1 : 0);
+    echo(4 == $func([3, 1, 100, 100, 1, 3]) ? 1 : 0);
+    echo(2 == $func([3, 2, 4, 3, 5]) ? 1 : 0);
+    echo(2 == $func([5, 3, 4, 2, 3]) ? 1 : 0);
+    echo(2 == $func([1, 3, 2, 4, 3, 5]) ? 1 : 0);
+    echo(2 == $func([5, 3, 4, 2, 3, 1]) ? 1 : 0);
+
+    echo(3 == $func([5, 3, 4, 6, 1, 1, 1]) ? 1 : 0);
+    echo(3 == $func([5, 3, 4, 6, 1, 1, 1, 1]) ? 1 : 0);
+    echo(3 == $func([5, 4, 3, 6, 1, 1, 1]) ? 1 : 0);
+    echo(3 == $func([5, 4, 3, 6, 1, 1, 1, 1]) ? 1 : 0);
+    echo(1 == $func([3, 4, 3, 6, 1, 1, 1]) ? 1 : 0);
+    echo(1 == $func([3, 4, 3, 6, 1, 1, 1, 1]) ? 1 : 0);
 }
 
 
-function rain($data)
+foreach ([[100000, 100], [100, 100000]] as $params) {
+    $tests = 10;
+    list($len, $range) = $params;
+    $times = [];
+    $m1 = $m2 = null;
+    echo "\ntest random $tests with $len elements with rand(0, $range)\n";
+    while ($tests-- > 0) {
+        $test = [];
+        for ($i = 0; $i < $len; ++$i) {
+            $test[] = rand(0, $range);
+        }
+
+        $t1 = microtime(1);
+        $r1 = rain1($test);
+        $t1 = microtime(1) - $t1;
+        if (!isset($m1)) {
+            $m1 = memory_get_peak_usage();
+        }
+
+        $t2 = microtime(1);
+        $r2 = rain2($test);
+        $t2 = microtime(1) - $t2;
+        if (!isset($m2)) {
+            $m2 = memory_get_peak_usage();
+        }
+        if ($r1 != $r2) {
+            echo "ERROR with:", json_encode($test), "\n";
+        }
+        $times[] = ($t2 - $t1);
+    }
+    echo "avg time diff range2 - range1:", round(array_sum($times) / count($times), 2), "sec\n";
+    echo "first mem diff range2 - range1: ", round(($m2 - $m1) / 1024 / 1024, 2), "mb\n";
+}
+
+function rain1($data)
 {
     global $debug;
     $idx = count($data);
@@ -49,13 +86,11 @@ function rain($data)
     $last = 0;
     while ($idx--) {
         $cur = $data[$idx];
-        if ($cur < $max) {
-            for ($y = $cur+1; $y <=$max; ++$y) {
-                $mem[$y] = ($mem[$y] ?? 0)+1;
-            }
+        for ($y = $cur + 1; $y <= $max; ++$y) {
+            $mem[$y] = ($mem[$y] ?? 0) + 1;
         }
 
-        for ($y = $last + 1;$y <= min($cur, $max);++$y) {
+        for ($y = $last + 1; $y <= min($cur, $max); ++$y) {
             $result += ($mem[$y] ?? 0);
             unset($mem[$y]);
         }
@@ -101,11 +136,11 @@ function rain2($data)
         $result += ($waterline_cur > $data[$left] ? $waterline_cur - $data[$left] : 0)
             + ($right != $left && $waterline_cur > $data[$right] ? $waterline_cur - $data[$right] : 0);
 
-        for ($y = $waterline + 1; $y <= $data[$left]; ++$y) {
+        for ($y = $waterline + 1; $y <= max($data[$left],$waterline_cur); ++$y) {
             $result += ($left_mem[$y] ?? 0);
             unset($left_mem[$y]);
         }
-        for ($y = $waterline + 1; $y <= $data[$right]; ++$y) {
+        for ($y = $waterline + 1; $y <= max($data[$right],$waterline_cur); ++$y) {
             $result += ($right_mem[$y] ?? 0);
             unset($right_mem[$y]);
         }
